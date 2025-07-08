@@ -44,30 +44,63 @@ The `docs/` directory is organized into subdirectories:
 - Reference relevant docs when discussing implementation details
 - Cross-reference related documentation files
 
+## 🔴 CRITICAL: Industry-Standard Coding Compliance
+
+**MANDATORY READING**: These documents define industry-standard practices that MUST be followed:
+
+### Core Standards (REQUIRED)
+- **`/docs/code/standards.md`** - Industry-standard development requirements and testing
+- **`/docs/code/typescript.md`** - TypeScript best practices and patterns
+- **`/docs/code/ecs.md`** - Complete Entity Component System architecture
+- **`/docs/code/implementation.md`** - Core implementation patterns (interfaces, errors, events, commands)
+
+### Key Industry Standards We Follow
+- **Interface-Driven Testing**: Write tests immediately after defining interfaces to validate them
+- **TypeScript Strict Mode**: All code must use strict TypeScript configuration
+- **ECS Architecture**: Industry-standard Entity Component System patterns (Unity/Unreal style)
+- **Result Pattern**: Rust-inspired error handling for type safety
+- **90% Test Coverage**: Industry standard minimum coverage requirement
+- **Security-First**: Input validation and secure coding practices
+
 ## Code Development Process
 
 ### Planning Changes
 1. Review existing documentation in `docs/`
-2. Create or update relevant documentation BEFORE implementing
-3. Use the TodoWrite tool to break down complex tasks
-4. Implement features following the documented design
+2. **Read industry standards** in order: `standards.md`, `typescript.md`, `ecs.md`, `implementation.md`
+3. **CRITICAL for Database Work**: Review `/docs/code/database-design-guide.md` for D1 scaling patterns
+4. Create or update relevant documentation BEFORE implementing
+5. Use the TodoWrite tool to break down complex tasks
+6. Implement features following industry-standard patterns
 
-### Code Standards
-- Use TypeScript's strict mode for all new code
-- Follow ESM module patterns consistently
+### Mandatory Code Standards (Industry Best Practices)
+- **Test-Driven Development (TDD) is MANDATORY** - Write tests FIRST for all code (except third-party integrations)
+- **ALL features MUST be tested** (90% coverage minimum - industry standard)
+- **TypeScript Strict Mode** - Follow patterns in `docs/code/typescript.md`
+- **ECS Architecture** - Follow industry patterns in `docs/code/ecs.md`
+- **Result Pattern** - Use Rust-inspired error handling from `docs/code/implementation.md`
+- **Event-Driven Systems** - No direct system-to-system calls (ECS standard)
+- **Security-First** - Validate all inputs, never trust user data
 - Ensure all code passes linting (`pnpm run lint`)
-- Write tests for new functionality
 - Run `pnpm run typecheck` before completing any task
 
-### Testing Requirements
-- Write tests using Vitest for all new features
+### Testing Requirements (MANDATORY - TDD Process)
+- **TDD Red-Green-Refactor Cycle**:
+  1. **RED**: Write failing test that defines desired behavior
+  2. **GREEN**: Write minimal code to make test pass
+  3. **REFACTOR**: Improve code while keeping tests green
+- **Test-First Development**: NEVER write implementation before test (except third-party integrations)
+- **All code must actually run**: Tests ensure implementation correctness and prevent broken code
+- **Unit tests**: Every function, method, and component MUST have tests written FIRST
+- **Integration tests**: System interactions MUST be tested  
+- **Command tests**: Every command MUST have comprehensive coverage
+- **Error path testing**: All error conditions MUST be tested
 - Run `pnpm test` to ensure tests pass
-- Maintain test coverage for critical game logic
+- Verify test coverage meets 90% minimum
 
 ## Repository-Specific Rules
 
 ### MUD Architecture
-Based on our technical architecture (see `/docs/TECHNICAL-ARCHITECTURE.md`):
+Based on our technical architecture (see `/docs/code/architecture.md`):
 - Server code lives in `src/server/` (networking, database, security)
 - Game logic lives in `src/game/` (entities, systems, commands)
 - Bundle system in `src/bundles/` (modular feature sets)

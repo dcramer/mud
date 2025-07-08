@@ -1,5 +1,5 @@
-import { describe, expect, it } from 'vitest';
 import { startServer } from '@/index';
+import { describe, expect, it } from 'vitest';
 
 describe('MUD Server', () => {
   it('should export startServer function', () => {

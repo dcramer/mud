@@ -27,7 +27,7 @@ Type Checking: TypeScript compiler
 Database: Drizzle ORM + Drizzle Kit (migrations)
 Testing: Vitest + supertest
 Monitoring: (TBD - likely Grafana + Prometheus)
-Code Standards: See CODING-GUIDELINES.md
+Code Standards: See standards.md
 ```
 
 ## Architecture Patterns

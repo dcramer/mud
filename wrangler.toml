@@ -1,0 +1,58 @@
+name = "mud-game"
+main = "src/server/worker.ts"
+compatibility_date = "2024-01-01"
+
+[vars]
+ENVIRONMENT = "development"
+
+[[d1_databases]]
+binding = "DB_AUTH"
+database_name = "mud-auth"
+database_id = "your-auth-database-id"
+migrations_dir = "drizzle/auth"
+
+[[d1_databases]]
+binding = "DB_GAME"
+database_name = "mud-game-main"
+database_id = "your-game-database-id"
+migrations_dir = "drizzle/game"
+
+[[d1_databases]]
+binding = "DB_SOCIAL"
+database_name = "mud-social"
+database_id = "your-social-database-id"
+migrations_dir = "drizzle/social"
+
+[[d1_databases]]
+binding = "DB_ANALYTICS"
+database_name = "mud-analytics"
+database_id = "your-analytics-database-id"
+migrations_dir = "drizzle/analytics"
+
+[[kv_namespaces]]
+binding = "PLAYER_CACHE"
+id = "your-player-cache-id"
+
+[[kv_namespaces]]
+binding = "ROOM_CACHE"
+id = "your-room-cache-id"
+
+[[kv_namespaces]]
+binding = "SESSION_CACHE"
+id = "your-session-cache-id"
+
+[[durable_objects]]
+bindings = [
+  { name = "GAME_ROOMS", class_name = "GameRoom" },
+  { name = "COMBAT_INSTANCES", class_name = "CombatInstance" }
+]
+
+[[migrations]]
+tag = "v1"
+new_classes = ["GameRoom", "CombatInstance"]
+
+[env.production]
+vars = { ENVIRONMENT = "production" }
+
+[env.staging]
+vars = { ENVIRONMENT = "staging" }

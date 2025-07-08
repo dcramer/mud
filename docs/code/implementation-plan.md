@@ -4,7 +4,9 @@
 
 This document outlines a phased approach to implementing our MUD, prioritizing systems that are essential for core gameplay over complex features that can be added later as the world grows.
 
-**Prerequisites**: Review [TECHNICAL-ARCHITECTURE.md](TECHNICAL-ARCHITECTURE.md) for technical foundation and stack decisions.
+**Prerequisites**: Review [architecture.md](architecture.md) for technical foundation and stack decisions.
+
+**Progress Tracking**: See [implementation-progress.md](implementation-progress.md) for current development status.
 
 ## Phase 1: Core Minimum Viable Game (4-6 months)
 

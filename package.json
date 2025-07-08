@@ -6,8 +6,9 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "dev": "vite-node src/index.ts",
-    "build": "tsdown src/index.ts --outDir dist",
+    "dev": "wrangler dev",
+    "dev:local": "wrangler dev --local",
+    "build": "tsdown src/server/worker.ts --outDir dist",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:ui": "vitest --ui",
@@ -16,30 +17,63 @@
     "lint:fix": "biome check --write .",
     "format": "biome format --write .",
     "typecheck": "tsc --noEmit",
-    "prepare": "simple-git-hooks"
+    "prepare": "simple-git-hooks",
+    "d1:create": "wrangler d1 create mud-game",
+    "d1:list": "wrangler d1 list",
+    "d1:migrations:create": "wrangler d1 migrations create mud-game",
+    "d1:migrations:apply": "wrangler d1 migrations apply mud-game --local",
+    "d1:migrations:apply:remote": "wrangler d1 migrations apply mud-game --remote",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:push": "drizzle-kit push",
+    "db:studio": "drizzle-kit studio",
+    "db:init": "NODE_ENV=development tsx src/server/database/init-local.ts",
+    "start": "NODE_ENV=development tsx src/client/terminal/terminal-kit-game-client.ts",
+    "demo": "NODE_ENV=development tsx demo.ts"
   },
-  "keywords": ["mud", "game", "server", "typescript"],
+  "keywords": [
+    "mud",
+    "game",
+    "server",
+    "typescript"
+  ],
   "author": "",
   "license": "ISC",
   "packageManager": "pnpm@10.11.0",
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
+    "@cloudflare/workers-types": "^4.20241218.0",
+    "@types/better-sqlite3": "^7.6.13",
     "@types/node": "^22.10.4",
+    "@types/ws": "^8.18.1",
     "@vitest/coverage-v8": "^2.1.8",
     "@vitest/ui": "^2.1.8",
+    "better-sqlite3": "^12.0.0",
+    "dotenv": "^17.1.0",
+    "drizzle-kit": "^0.31.4",
     "lint-staged": "^15.4.0",
     "simple-git-hooks": "^2.11.1",
     "tsdown": "^0.2.17",
+    "tsx": "^4.20.3",
     "typescript": "^5.7.2",
     "vite": "^6.0.7",
     "vite-node": "^2.1.8",
-    "vitest": "^2.1.8"
+    "vitest": "^2.1.8",
+    "wrangler": "^3.94.0",
+    "ws": "^8.18.3"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@types/terminal-kit": "^2.5.7",
+    "chalk": "^5.4.1",
+    "drizzle-orm": "^0.44.2",
+    "terminal-kit": "^3.1.2"
+  },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged"
   },
   "lint-staged": {
-    "*.{ts,tsx,js,jsx,json,md}": ["biome check --write --no-errors-on-unmatched"]
+    "*.{ts,tsx,js,jsx,json,md}": [
+      "biome check --write --no-errors-on-unmatched"
+    ]
   }
 }
